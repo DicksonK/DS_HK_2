@@ -3,3 +3,4 @@ notes
 notebooks/.ipynb_checkpoints/
 .slides.html
 data/*
+*.csv
