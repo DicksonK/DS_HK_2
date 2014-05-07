@@ -10,13 +10,15 @@
 import pandas as pd
 import numpy as np
 
+data_dir = '../../../data/'
+
 # Set some Pandas options
 pd.set_option('max_columns', 30)
 pd.set_option('max_rows', 20)
 
 # Store data in a consistent place
 
-stats = pd.read_csv('baseball.csv', sep=',', index_col='id')
+stats = pd.read_csv(data_dir + 'baseball.csv', sep=',', index_col='id')
 
 #print stats
 
