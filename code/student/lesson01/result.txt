@@ -1,0 +1,160 @@
+|=====================================================|
+|@Run: 2014-04-29 15:43:52.341446                     |
+|@Version: 1.0                                        |
+|@Author: Dickson Kwong                               |
+|=====================================================|
+
+|=*=*=*=*=*=*=*=*=*=*=*=Start=*=*=*=*=*=*=*=*=*=*=*=*=|
+ 0.   The total impression in the file
+   Total impression: 2295559
+
+ i.   The average age in the file
+   Average age: 29.48
+
+ ii.  Click through rate (avg clicks per impression)
+   Impression  0 has average clicks 0.0000
+   Impression  1 has average clicks 0.0180
+   Impression  2 has average clicks 0.0376
+   Impression  3 has average clicks 0.0560
+   Impression  4 has average clicks 0.0719
+   Impression  5 has average clicks 0.0932
+   Impression  6 has average clicks 0.1103
+   Impression  7 has average clicks 0.1301
+   Impression  8 has average clicks 0.1468
+   Impression  9 has average clicks 0.1718
+   Impression 10 has average clicks 0.1815
+   Impression 11 has average clicks 0.2015
+   Impression 12 has average clicks 0.2382
+   Impression 13 has average clicks 0.2720
+   Impression 14 has average clicks 0.2512
+   Impression 15 has average clicks 0.3750
+   Impression 16 has average clicks 0.2000
+   Impression 17 has average clicks 0.3636
+   Impression 18 has average clicks 0.0000
+   Impression 20 has average clicks 0.0000
+
+ iii. The oldest person in the file
+   The oldest person in the file is: 108
+|=*=*=*=*=*=*=*=*=*=*=*=*End*=*=*=*=*=*=*=*=*=*=*=*=|
+
+
+|=====================================================|
+|@Run: 2014-04-29 16:03:19.932599                     |
+|@Version: 1.0                                        |
+|@Author: Dickson Kwong                               |
+|=====================================================|
+
+|=*=*=*=*=*=*=*=*=*=*=*=Start=*=*=*=*=*=*=*=*=*=*=*=*=|
+ 0.   The total impression in the file
+   Total impression: 2295559
+
+ i.   The average age in the file
+   Average age: 29.48
+
+ ii.  Click through rate (avg clicks per impression)
+   Impression  0 has average clicks 0.0000
+   Impression  1 has average clicks 0.0180
+   Impression  2 has average clicks 0.0376
+   Impression  3 has average clicks 0.0560
+   Impression  4 has average clicks 0.0719
+   Impression  5 has average clicks 0.0932
+   Impression  6 has average clicks 0.1103
+   Impression  7 has average clicks 0.1301
+   Impression  8 has average clicks 0.1468
+   Impression  9 has average clicks 0.1718
+   Impression 10 has average clicks 0.1815
+   Impression 11 has average clicks 0.2015
+   Impression 12 has average clicks 0.2382
+   Impression 13 has average clicks 0.2720
+   Impression 14 has average clicks 0.2512
+   Impression 15 has average clicks 0.3750
+   Impression 16 has average clicks 0.2000
+   Impression 17 has average clicks 0.3636
+   Impression 18 has average clicks 0.0000
+   Impression 20 has average clicks 0.0000
+
+ iii. The oldest person in the file
+   The oldest person in the file is: 108
+|=*=*=*=*=*=*=*=*=*=*=*=*End*=*=*=*=*=*=*=*=*=*=*=*=|
+
+
+|=====================================================|
+|@Run: 2014-04-29 16:35:24.752395                     |
+|@Version: 1.0                                        |
+|@Author: Dickson Kwong                               |
+|=====================================================|
+
+|=*=*=*=*=*=*=*=*=*=*=*=Start=*=*=*=*=*=*=*=*=*=*=*=*=|
+ 0.   The total impression in the file
+   Total impression: 2295559
+
+ i.   The average age in the file
+   Average age: 29.48
+
+ ii.  Click through rate (avg clicks per impression)
+   Impression  0 has average clicks 0.0000
+   Impression  1 has average clicks 0.0180
+   Impression  2 has average clicks 0.0376
+   Impression  3 has average clicks 0.0560
+   Impression  4 has average clicks 0.0719
+   Impression  5 has average clicks 0.0932
+   Impression  6 has average clicks 0.1103
+   Impression  7 has average clicks 0.1301
+   Impression  8 has average clicks 0.1468
+   Impression  9 has average clicks 0.1718
+   Impression 10 has average clicks 0.1815
+   Impression 11 has average clicks 0.2015
+   Impression 12 has average clicks 0.2382
+   Impression 13 has average clicks 0.2720
+   Impression 14 has average clicks 0.2512
+   Impression 15 has average clicks 0.3750
+   Impression 16 has average clicks 0.2000
+   Impression 17 has average clicks 0.3636
+   Impression 18 has average clicks 0.0000
+   Impression 20 has average clicks 0.0000
+
+ iii. The oldest person in the file
+   The oldest person in the file is: 108
+|=*=*=*=*=*=*=*=*=*=*=*=*End*=*=*=*=*=*=*=*=*=*=*=*=|
+
+
+|=====================================================|
+|@Run: 2014-04-29 21:56:37.165839                     |
+|@Version: 1.0                                        |
+|@Author: Dickson Kwong                               |
+|=====================================================|
+
+|=*=*=*=*=*=*=*=*=*=*=*=Start=*=*=*=*=*=*=*=*=*=*=*=*=|
+ 0.   The total impression in the file
+   Total impression: 2295559
+
+ i.   The average age in the file
+   Average age: 29.48
+
+ ii.  Click through rate (avg clicks per impression)
+   Impression  0 has average clicks 0.0000
+   Impression  1 has average clicks 0.0180
+   Impression  2 has average clicks 0.0376
+   Impression  3 has average clicks 0.0560
+   Impression  4 has average clicks 0.0719
+   Impression  5 has average clicks 0.0932
+   Impression  6 has average clicks 0.1103
+   Impression  7 has average clicks 0.1301
+   Impression  8 has average clicks 0.1468
+   Impression  9 has average clicks 0.1718
+   Impression 10 has average clicks 0.1815
+   Impression 11 has average clicks 0.2015
+   Impression 12 has average clicks 0.2382
+   Impression 13 has average clicks 0.2720
+   Impression 14 has average clicks 0.2512
+   Impression 15 has average clicks 0.3750
+   Impression 16 has average clicks 0.2000
+   Impression 17 has average clicks 0.3636
+   Impression 18 has average clicks 0.0000
+   Impression 20 has average clicks 0.0000
+
+ iii. The oldest person in the file
+   The oldest person in the file is: 108
+|=*=*=*=*=*=*=*=*=*=*=*=*End*=*=*=*=*=*=*=*=*=*=*=*=|
+
+

@@ -1,0 +1,29 @@
+# ________   .__          __                            
+# \______ \  |__|  ____  |  | __  ______  ____    ____  
+#  |    |  \ |  |_/ ___\ |  |/ / /  ___/ /  _ \  /    \ 
+#  |    `   \|  |\  \___ |    <  \___ \ (  <_> )|   |  \
+# /_______  /|__| \___  >|__|_ \/____  > \____/ |___|  /
+#         \/          \/      \/     \/              \/ 
+# GA DataScience Lab-4
+# Date: 2014-05-07
+
+import pandas as pd
+import numpy as np
+
+# Set some Pandas options
+pd.set_option('max_columns', 30)
+pd.set_option('max_rows', 20)
+
+# Store data in a consistent place
+
+stats = pd.read_csv('baseball.csv', sep=',', index_col='id')
+
+#print stats
+
+slg = lambda x: (x['h']-x['X2b']-x['X3b']-x['hr'] + 2*x['X2b'] + 3*x['X3b'] + 4*x['hr'])/(x['ab']+1e-6)
+
+stats['slg'] = stats.apply(slg, axis = 1)
+
+stats['slg_diff'] = stats.slg - stats.slg.max()
+
+print stats[:10]
