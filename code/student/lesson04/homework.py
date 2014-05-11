@@ -9,6 +9,7 @@
 
 import pandas as pd
 import numpy as np
+from functools import partial
 
 data_dir = '../../../data/'
 
@@ -43,23 +44,14 @@ dataset = pd.read_csv(data_dir + 'baseball.csv', sep=',', index_col='id')
 
 #print dataset[:10]
 
-slg = lambda x: (x['h']-x['X2b']-x['X3b']-x['hr'] + 2*x['X2b'] + 3*x['X3b'] + 4*x['hr'])/(x['ab']+1e-6)
+def add_column(tag_dataset, col_name, col_formula):
+	tag_dataset[col_name] = tag_dataset.apply(col_formula, axis = 1)
+	return tag_dataset
 
-best_bat_rate = lambda x: (x['h']/(x['ab'] + 1e-6))
-
-best_so_rate = lambda x: (x['so']/(x['ab'] + 1e-6))
-
-stolen_base_rate = lambda x: (x['sb']/(x['r'] + 1e-6))
-
-caught_steal_rate = lambda x: (x['cs']/(x['r'] + 1e-6))
-
-dataset['BBR'] = dataset.apply(best_bat_rate, axis = 1)
-
-dataset['BSR'] = dataset.apply(best_so_rate, axis = 1)
-
-dataset['SBR'] = dataset.apply(stolen_base_rate, axis = 1)
-
-dataset['CSR'] = dataset.apply(caught_steal_rate, axis = 1)
+dataset = add_column(dataset, 'BBR', partial(lambda x: (x['h']/(x['ab'] + 1e-6))))
+dataset = add_column(dataset, 'BSR', partial(lambda x: (x['sb']/(x['r'] + 1e-6))))
+dataset = add_column(dataset, 'SBR', partial(lambda x: (x['cs']/(x['r'] + 1e-6))))
+dataset = add_column(dataset, 'CSR', partial(lambda x: (x['cs']/(x['r'] + 1e-6))))
 
 '''
 Get the % of hit rate
@@ -69,18 +61,7 @@ times
 the stolen bases rate
 offset by the caught stealrate
 '''
-best_play_formule = lambda x: (((x['BBR'] - x['BSR']) * x['hr']) * ((x['SBR'] - x['CSR'])))
-
-dataset['BPF'] = dataset.apply(best_play_formule, axis = 1)
-
-
-print max(dataset['BBR'])
-
-print max(dataset['BPF'])
-
-#print dataset.query('BBLSR >0.2')
-
-#print dataset.sort('BPF', ascending = False)
+dataset = add_column(dataset, 'BPF', partial(lambda x: (((x['BBR'] - x['BSR']) * x['hr']) * ((x['SBR'] - x['CSR'])))))
 
 result = dataset[:1].sort('BPF', ascending = False)
 
