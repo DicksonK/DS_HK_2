@@ -136,23 +136,15 @@ CTR_modle = linear_model.LinearRegression()
 
 # Fit the data
 X = nytimes[['Age', 'Gender']].values
-#print type(age)
-
-#print age.head()
 
 CTR = nytimes['Ctr'].values
 
 CTR_modle.fit(X, CTR)
 
-print "\n"
+print "\nAge & Gender"
 
-# Display the coefficients:
 print CTR_modle.coef_
-
-# Display our SSE:
 print np.mean((CTR_modle.predict(X) - CTR) ** 2)
-
-# Scoring our model (closer to 1 is better!)
 print CTR_modle.score(X, CTR)
 
 #===== Q3a
@@ -164,23 +156,15 @@ CTR_modle = linear_model.LinearRegression()
 
 # Fit the data
 X = nytimes[['Gender']].values
-#print type(age)
-
-#print age.head()
 
 CTR = nytimes['Ctr'].values
 
 CTR_modle.fit(X, CTR)
 
-print "\n"
+print "\nGender"
 
-# Display the coefficients:
 print CTR_modle.coef_
-
-# Display our SSE:
 print np.mean((CTR_modle.predict(X) - CTR) ** 2)
-
-# Scoring our model (closer to 1 is better!)
 print CTR_modle.score(X, CTR)
 
 #===== Q3b
@@ -192,23 +176,15 @@ CTR_modle = linear_model.LinearRegression()
 
 # Fit the data\
 X = nytimes[['Age']].values
-#print type(age)
-
-#print age.head()
 
 CTR = nytimes['Ctr'].values
 
 CTR_modle.fit(X, CTR)
 
-print "\n"
+print "\nAge"
 
-# Display the coefficients:
 print CTR_modle.coef_
-
-# Display our SSE:
 print np.mean((CTR_modle.predict(X) - CTR) ** 2)
-
-# Scoring our model (closer to 1 is better!)
 print CTR_modle.score(X, CTR)
 
 #===== Q4
