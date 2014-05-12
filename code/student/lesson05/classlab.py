@@ -133,6 +133,12 @@ print np.mean((regr_log.predict(log_body) - log_brain) ** 2)
 print regr_log.score(log_body, log_brain)
 
 #===== Q2
+'''
+Using your aggregate data compiled from nytimes1-30.csv, write a python script that 
+determines the best model predicting CTR based off of age and gender. Since gender is
+not actually numeric (it is binary), investigate ways to vectorize this feature. Clue:
+you may want two features now instead of one.
+'''
 
 nytimes = pd.read_csv(DATA_DIR + 'nyagg.csv')
 
@@ -153,7 +159,11 @@ print np.mean((CTR_modle.predict(X) - CTR) ** 2)
 print CTR_modle.score(X, CTR)
 
 #===== Q3a
-
+'''
+Compare this practice to making two separate models based on Gender, with Age as your one 
+feature predicting CTR. How are your results different? Which results would you be more 
+confident in presenting to your manager? Why's that?
+'''
 nytimes = pd.read_csv(DATA_DIR + 'nyagg.csv')
 
 # Make the model object
@@ -174,7 +184,11 @@ print CTR_modle.score(X, CTR)
 
 #===== Q3b
 
-nytimes = pd.read_csv(DATA_DIR + 'nyagg.csv')
+nytimes = pd.read_csv(DATA_DIR + 'nyagg.csv').query('Age >= 20')
+
+#print nytimes.head()
+
+#nytimes = nytimes.query('Age > 0')
 
 # Make the model object
 CTR_modle = linear_model.LinearRegression()
