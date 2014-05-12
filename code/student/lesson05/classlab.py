@@ -87,6 +87,8 @@ brain = mammals['brain'].values
 
 regr.fit(body, brain)
 
+print "Body v.s. Brain"
+
 # Display the coefficients:
 print regr.coef_
 
@@ -116,7 +118,7 @@ log_brain = mammals_2['log_brain'].values
 
 regr_log.fit(log_body, log_brain)
 
-print "\n"
+print "\nLog Body v.s. Log Brain"
 
 # Display the coefficients:
 print regr_log.coef_
