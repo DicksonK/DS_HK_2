@@ -18,6 +18,27 @@ pd.set_option('max_rows', 20)
 
 # Store data in a consistent place
 
+'''
+lg             League
+G              Games
+AB             At Bats
+R              Runs
+H              Hits
+X2B             Doubles
+X3B             Triples
+HR             Homeruns
+RBI            Runs Batted In
+SB             Stolen Bases
+CS             Caught stealing
+BB             Base on Balls
+SO             Strikeouts
+IBB            Intentional walks
+HBP            Hit by pitch
+SH             Sacrifices
+SF             Sacrifice flies
+GIDP           Grounded into double plays
+'''
+
 stats = pd.read_csv(data_dir + 'baseball.csv', sep=',', index_col='id')
 
 #print stats

@@ -1,0 +1,3 @@
+http://homes.cs.washington.edu/~dhalperi/pubs/halperin_2013_ssdbm_geomics_case_study.pdf
+
+I was impressed with the SQLShare solution. I believe this is what exactly Microsoft (Power BI Q&A), and Splunk (schema on the fly) doing. In my opinion, since most of the people don't understand or care

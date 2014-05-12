@@ -59,7 +59,7 @@ then offset the strikeouts rate
 factor the number of Homeruns
 times 
 the stolen bases rate
-offset by the caught stealrate
+offset by the caught steal rate
 '''
 dataset = add_column(dataset, 'BPF', partial(lambda x: (((x['BBR'] - x['BSR']) * x['hr']) * ((x['SBR'] - x['CSR'])))))
 
