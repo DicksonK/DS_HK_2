@@ -19,7 +19,7 @@ Limit 1
 SELECT Categories.CategoryName, COUNT(OrderDetails.ProductID) FROM OrderDetails
   INNER JOIN Products ON Products.ProductID = OrderDetails.ProductID
   INNER JOIN Categories ON Categories.CategoryID = Products.CategoryID
-GROUP BY OrderDetails.ProductID
+GROUP BY Categories.CategoryID
 ORDER BY COUNT(OrderDetails.ProductID) DESC
 
 -- What employee made the most sales (by number of sales)?
