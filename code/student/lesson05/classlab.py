@@ -15,6 +15,9 @@ import matplotlib.pyplot as plt
 from numpy import array, dot
 from scipy.linalg import inv
 
+from numpy import log
+from sklearn import linear_model
+
 prediction = np.array([1, 2, 3])
 actual = np.array([1.12, 1.89, 3.02])
 
@@ -68,7 +71,7 @@ plt.show()
 plt.hist(mammals['brain'], bins=range(0, 10000, 100))
 plt.show()
 '''
-from numpy import log
+
 # figure(figsize=(20,8))
 
 mammals['log_body'] = log(mammals['body'])
@@ -76,7 +79,7 @@ mammals['log_brain'] = log(mammals['brain'])
 
 plt.scatter(mammals['log_body'], mammals['log_brain'])
 
-from sklearn import linear_model
+
 
 # Make the model object
 regr = linear_model.LinearRegression()
