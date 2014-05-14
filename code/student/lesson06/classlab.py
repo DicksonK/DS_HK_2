@@ -63,3 +63,5 @@ ridge = linear_model.Ridge()
 ridge.fit(body_squared, brain)
 
 print ((ridge.coef_[1] * mammals['body'])**2) + ((ridge.coef_[0] * mammals['body'])) + ridge.intercept_
+
+print ridge.score
