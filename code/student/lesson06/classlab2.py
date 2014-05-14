@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 from numpy import arange,array,ones#,random,linalg
 from pylab import plot,show
 from scipy import stats
+from sklearn.feature_selection.univariate_selection import f_regression
 
 # Set some Pandas options
 pd.set_option('max_columns', 30)
@@ -87,10 +88,21 @@ print car_set.columns
 
 print car_set.head()
 
+car_set_temp = car_set
+
 print isinstance(int(car_set['Cylinders'][0]), int)
 
 for col in car_set.columns:
-	print str(col) + " - " + str(isinstance(car_set[col][0], (int, long)))
+	print "Check --> : "  + str(col) +  " " + str(isinstance(car_set[col][0], (int, long)))
+	if isinstance(car_set[col][0], (str)):
+		print col
+		car_set_temp = car_set_temp.drop([col],1)
+
+print car_set_temp.describe
+
+#Need to filter out NaN
+
+print f_regression(car_set_temp, car_set['MPG.city'])
 
 '''
 #MPG.city
