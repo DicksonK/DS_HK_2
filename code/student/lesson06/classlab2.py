@@ -124,7 +124,7 @@ car_set_f['f'] = f
 
 car_set_f['p'] = p
 
-print car_set_f
+print car_set_f.sort(['f'], ascending=[0])
 
 '''
 #MPG.city
