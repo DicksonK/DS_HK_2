@@ -84,25 +84,35 @@ def f_regression_feature_selection(input, response):
 #Predicting City and Highway MPG.
 #=========================================================
 
-print car_set.columns
+print "\n\n================================"
+print "Predicting City and Highway MPG."
+print "================================"
+#print car_set.columns
 
-print car_set.head()
+#print car_set.head()
 
 car_set_temp = car_set
 
 print isinstance(int(car_set['Cylinders'][0]), int)
 
 for col in car_set.columns:
-	print "Check --> : "  + str(col) +  " " + str(isinstance(car_set[col][0], (int, long)))
+	#print "Check --> : "  + str(col) +  " " + str(isinstance(car_set[col][0], (int, long)))
 	if isinstance(car_set[col][0], (str)):
-		print col
+		#print col
 		car_set_temp = car_set_temp.drop([col],1)
 
-print car_set_temp.describe
+#print car_set_temp.describe
+
+car_set_temp = car_set_temp.fillna(0)
 
 #Need to filter out NaN
 
-print f_regression(car_set_temp, car_set['MPG.city'])
+print car_set_temp.columns
+
+f, p = f_regression(car_set_temp, car_set['MPG.city'])
+
+print f
+print p
 
 '''
 #MPG.city
@@ -115,7 +125,5 @@ speed = car_2col['speed'].values
 
 ridge2 = linear_model.Ridge()
 ridge2.fit(speed_sq, dist)
-
-
 
 '''
