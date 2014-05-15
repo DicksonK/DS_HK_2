@@ -114,6 +114,18 @@ f, p = f_regression(car_set_temp, car_set['MPG.city'])
 print f
 print p
 
+print car_set_temp.columns.values.tolist()
+
+#car_set_f = pd.dataframe({car_set_temp.columns.tolist()})
+
+car_set_f = pd.DataFrame(car_set_temp.columns.values.tolist(), columns=['col_head'])
+
+car_set_f['f'] = f
+
+car_set_f['p'] = p
+
+print car_set_f
+
 '''
 #MPG.city
 car_set['Cylinders_sq'] = car_set['Cylinders']**2
