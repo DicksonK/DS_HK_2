@@ -97,6 +97,9 @@ print isinstance(int(car_set['Cylinders'][0]), int)
 
 for col in car_set.columns:
 	#print "Check --> : "  + str(col) +  " " + str(isinstance(car_set[col][0], (int, long)))
+	if isinstance(car_set[col][0], (int, long)):
+		car_set_temp[col] = car_set_temp[col].fillna(car_set_temp[col].mean(axis=1))
+
 	if isinstance(car_set[col][0], (str)):
 		#print col
 		car_set_temp = car_set_temp.drop([col],1)
@@ -111,10 +114,10 @@ print car_set_temp.columns
 
 f, p = f_regression(car_set_temp, car_set['MPG.city'])
 
-print f
-print p
+#print f
+#print p
 
-print car_set_temp.columns.values.tolist()
+#print car_set_temp.columns.values.tolist()
 
 #car_set_f = pd.dataframe({car_set_temp.columns.tolist()})
 
@@ -125,6 +128,8 @@ car_set_f['f'] = f
 car_set_f['p'] = p
 
 print car_set_f.sort(['f'], ascending=[0])
+
+#print car_set_f['f'].mean(axis=1)
 
 '''
 #MPG.city
