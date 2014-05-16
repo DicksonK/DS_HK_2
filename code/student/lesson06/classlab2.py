@@ -91,9 +91,40 @@ print "================================"
 
 #print car_set.head()
 
+
+
+#print isinstance(int(car_set['Cylinders'][0]), int)
+
+def removeNonNumberCol(org_df):
+	result_df = org_df
+	for col in org_df.columns:
+		if isinstance(org_df[col][0], (str)):
+			result_df = result_df.drop([col],1)
+	return result_df
+
+def fillna_Zero(org_df):
+	result_df = org_df
+	for col in org_df.columns:
+		if isinstance(car_set[col][0], (int, long)):
+			result_df[col] = result_df[col].fillna(0)
+	return result_df
+
+def fillna_Mean(org_df):
+	result_df = org_df
+	for col in result_df.columns:
+		if isinstance(result_df[col][0], (int, long)):
+			#result_df[col] = result_df[col].fillna(result_df[col].mean(axis=1))
+			result_df[col] = result_df[col].fillna(0)
+			print col
+	return result_df
+
+
+car_set_temp = fillna_Mean(removeNonNumberCol(car_set))
+
+print car_set_temp
+
 car_set_temp = car_set
 
-print isinstance(int(car_set['Cylinders'][0]), int)
 
 for col in car_set.columns:
 	#print "Check --> : "  + str(col) +  " " + str(isinstance(car_set[col][0], (int, long)))
@@ -106,7 +137,10 @@ for col in car_set.columns:
 
 #print car_set_temp.describe
 
-car_set_temp = car_set_temp.fillna(0)
+for col in car_set_temp.columns[pd.isnull(car_set_temp).all()]:
+	car_set_temp[col] = car_set_temp[col].astype(object).fillna(car_set_temp[col].mean(axis=1))
+
+#car_set_temp = car_set_temp.fillna(0)
 
 #Need to filter out NaN
 
