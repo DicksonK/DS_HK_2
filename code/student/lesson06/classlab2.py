@@ -87,13 +87,6 @@ def f_regression_feature_selection(input, response):
 print "\n\n================================"
 print "Predicting City and Highway MPG."
 print "================================"
-#print car_set.columns
-
-#print car_set.head()
-
-
-
-#print isinstance(int(car_set['Cylinders'][0]), int)
 
 def removeNonNumberCol(org_df):
 	result_df = org_df
@@ -113,7 +106,6 @@ def fillna_Mean(org_df):
 	result_df = org_df
 	for col in result_df.columns:
 		if isinstance(result_df[col][0], (int, long)):
-			#result_df[col] = result_df[col].fillna(result_df[col].mean(axis=1))
 			result_df[col] = result_df[col].fillna(0)
 			print col
 	return result_df
@@ -125,24 +117,13 @@ print car_set_temp
 
 car_set_temp = car_set
 
+car_set_temp = car_set_temp.fillna(car_set_temp.mean())
 
 for col in car_set.columns:
-	#print "Check --> : "  + str(col) +  " " + str(isinstance(car_set[col][0], (int, long)))
-	if isinstance(car_set[col][0], (int, long)):
-		car_set_temp[col] = car_set_temp[col].fillna(car_set_temp[col].mean(axis=1))
-
 	if isinstance(car_set[col][0], (str)):
-		#print col
 		car_set_temp = car_set_temp.drop([col],1)
 
 #print car_set_temp.describe
-
-for col in car_set_temp.columns[pd.isnull(car_set_temp).all()]:
-	car_set_temp[col] = car_set_temp[col].astype(object).fillna(car_set_temp[col].mean(axis=1))
-
-#car_set_temp = car_set_temp.fillna(0)
-
-#Need to filter out NaN
 
 print car_set_temp.columns
 
@@ -151,10 +132,6 @@ f, p = f_regression(car_set_temp, car_set['MPG.city'])
 #print f
 #print p
 
-#print car_set_temp.columns.values.tolist()
-
-#car_set_f = pd.dataframe({car_set_temp.columns.tolist()})
-
 car_set_f = pd.DataFrame(car_set_temp.columns.values.tolist(), columns=['col_head'])
 
 car_set_f['f'] = f
@@ -162,8 +139,6 @@ car_set_f['f'] = f
 car_set_f['p'] = p
 
 print car_set_f.sort(['f'], ascending=[0])
-
-#print car_set_f['f'].mean(axis=1)
 
 '''
 #MPG.city
