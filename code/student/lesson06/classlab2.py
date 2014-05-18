@@ -107,13 +107,13 @@ def fillna_Mean(org_df):
 	for col in result_df.columns:
 		if isinstance(result_df[col][0], (int, long)):
 			result_df[col] = result_df[col].fillna(0)
-			print col
+			#print col
 	return result_df
 
 
 car_set_temp = fillna_Mean(removeNonNumberCol(car_set))
 
-print car_set_temp
+#print car_set_temp
 
 car_set_temp = car_set
 
@@ -122,10 +122,12 @@ car_set_temp = car_set_temp.fillna(car_set_temp.mean())
 for col in car_set.columns:
 	if isinstance(car_set[col][0], (str)):
 		car_set_temp = car_set_temp.drop([col],1)
+	if col.find("MPG") > -1:
+		car_set_temp = car_set_temp.drop([col],1)
 
 #print car_set_temp.describe
 
-print car_set_temp.columns
+#print car_set_temp.columns
 
 f, p = f_regression(car_set_temp, car_set['MPG.city'])
 
@@ -138,7 +140,21 @@ car_set_f['f'] = f
 
 car_set_f['p'] = p
 
-print car_set_f.sort(['f'], ascending=[0])
+car_set_f = car_set_f.sort(['f'], ascending=[0]).reset_index()
+
+print car_set_f['col_head'][0]
+
+car_set_temp['x1'] = car_set_temp[car_set_f['col_head'][0]]**2
+
+mpg_city = [ [x] for x in car_set['MPG.city'].values]
+x1_squared = [ [x, y] for x,y in zip(car_set_temp[car_set_f['col_head'][0]].values, car_set_temp['x1'].values)]
+
+car_ridge = linear_model.Ridge()
+car_ridge.fit(x1_squared, mpg_city)
+
+print car_ridge.coef_
+
+print car_ridge.score(x1_squared, mpg_city)
 
 '''
 #MPG.city
