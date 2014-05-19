@@ -145,11 +145,20 @@ car_set_f = car_set_f.sort(['f'], ascending=[0]).reset_index()
 print "By using column: " + car_set_f['col_head'][0]
 
 car_set_temp['x1'] = car_set_temp[car_set_f['col_head'][0]]**2
+car_set_temp['y1'] = car_set_temp[car_set_f['col_head'][1]]**2
+car_set_temp['z1'] = car_set_temp[car_set_f['col_head'][2]]**2
+
 #car_set_temp['x2'] = car_set_temp[car_set_f['col_head'][0]]**3
 #car_set_temp['x3'] = car_set_temp[car_set_f['col_head'][0]]**4
 
 mpg_city = [ [x] for x in car_set['MPG.city'].values]
 x1_squared = [ [x0, x1] for x0,x1 in zip(car_set_temp[car_set_f['col_head'][0]].values, car_set_temp['x1'].values)]
+y1_squared = [ [y0, y1] for y0,y1 in zip(car_set_temp[car_set_f['col_head'][1]].values, car_set_temp['y1'].values)]
+z1_squared = [ [z0, z1] for z0,z1 in zip(car_set_temp[car_set_f['col_head'][2]].values, car_set_temp['z1'].values)]
+
+for row in range(len(x1_squared)):
+	x1_squared[row].extend(y1_squared[row])
+	x1_squared[row].extend(z1_squared[row])
 
 car_ridge = linear_model.Ridge()
 car_ridge.fit(x1_squared, mpg_city)
