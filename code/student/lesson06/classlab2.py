@@ -142,30 +142,20 @@ car_set_f['p'] = p
 
 car_set_f = car_set_f.sort(['f'], ascending=[0]).reset_index()
 
-print car_set_f['col_head'][0]
+print "By using column: " + car_set_f['col_head'][0]
 
 car_set_temp['x1'] = car_set_temp[car_set_f['col_head'][0]]**2
+#car_set_temp['x2'] = car_set_temp[car_set_f['col_head'][0]]**3
+#car_set_temp['x3'] = car_set_temp[car_set_f['col_head'][0]]**4
 
 mpg_city = [ [x] for x in car_set['MPG.city'].values]
-x1_squared = [ [x, y] for x,y in zip(car_set_temp[car_set_f['col_head'][0]].values, car_set_temp['x1'].values)]
+x1_squared = [ [x0, x1] for x0,x1 in zip(car_set_temp[car_set_f['col_head'][0]].values, car_set_temp['x1'].values)]
 
 car_ridge = linear_model.Ridge()
 car_ridge.fit(x1_squared, mpg_city)
 
-print car_ridge.coef_
+#print car_ridge.coef_
 
-print car_ridge.score(x1_squared, mpg_city)
+print "Score: " + str(car_ridge.score(x1_squared, mpg_city))
 
-'''
-#MPG.city
-car_set['Cylinders_sq'] = car_set['Cylinders']**2
-
-cylinders_sq = [ [x, y] for x,y in zip(car_set['Cylinders'].values, car_set['Cylinders_sq'].values)]
-
-mpg_city = [ [x] for x in car_set['dist'].values]
-speed = car_2col['speed'].values
-
-ridge2 = linear_model.Ridge()
-ridge2.fit(speed_sq, dist)
-
-'''
+#print car_ridge.predict(50)
