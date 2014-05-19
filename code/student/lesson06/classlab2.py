@@ -111,38 +111,32 @@ def fillna_Mean(org_df):
 	return result_df
 
 
-car_set_temp = fillna_Mean(removeNonNumberCol(car_set))
-
-#print car_set_temp
+#car_set_temp = fillna_Mean(removeNonNumberCol(car_set))
 
 car_set_temp = car_set
 
 car_set_temp = car_set_temp.fillna(car_set_temp.mean())
 
+#Remove all column has string & column header has "MPG"
 for col in car_set.columns:
 	if isinstance(car_set[col][0], (str)):
 		car_set_temp = car_set_temp.drop([col],1)
 	if col.find("MPG") > -1:
 		car_set_temp = car_set_temp.drop([col],1)
 
-#print car_set_temp.describe
-
-#print car_set_temp.columns
-
+#Find the f & p with the remainding column
 f, p = f_regression(car_set_temp, car_set['MPG.city'])
 
-#print f
-#print p
-
+#Create a new list to store each column f & p
 car_set_f = pd.DataFrame(car_set_temp.columns.values.tolist(), columns=['col_head'])
 
 car_set_f['f'] = f
-
 car_set_f['p'] = p
 
+#Sort and store the result
 car_set_f = car_set_f.sort(['f'], ascending=[0]).reset_index()
 
-print "By using column: " + car_set_f['col_head'][0]
+print "By using column: " + car_set_f['col_head'][0] + ", " + car_set_f['col_head'][1] + ", " + car_set_f['col_head'][2]
 
 car_set_temp['x1'] = car_set_temp[car_set_f['col_head'][0]]**2
 car_set_temp['y1'] = car_set_temp[car_set_f['col_head'][1]]**2
@@ -156,6 +150,7 @@ x1_squared = [ [x0, x1] for x0,x1 in zip(car_set_temp[car_set_f['col_head'][0]].
 y1_squared = [ [y0, y1] for y0,y1 in zip(car_set_temp[car_set_f['col_head'][1]].values, car_set_temp['y1'].values)]
 z1_squared = [ [z0, z1] for z0,z1 in zip(car_set_temp[car_set_f['col_head'][2]].values, car_set_temp['z1'].values)]
 
+#Combine those list, not sure what I am doing.
 for row in range(len(x1_squared)):
 	x1_squared[row].extend(y1_squared[row])
 	x1_squared[row].extend(z1_squared[row])
