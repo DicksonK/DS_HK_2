@@ -134,7 +134,9 @@ car_set_f['f'] = f
 car_set_f['p'] = p
 
 #Sort and store the result
-car_set_f = car_set_f.sort(['f'], ascending=[0]).reset_index()
+car_set_f = car_set_f.sort(['p'], ascending=[1]).reset_index()
+
+print car_set_f
 
 print "By using column: " + car_set_f['col_head'][0] + ", " + car_set_f['col_head'][1] + ", " + car_set_f['col_head'][2]
 

@@ -100,4 +100,4 @@ cars_input = cars_input.fillna(0)
 
 fp_value = feature_selection.univariate_selection.f_regression(cars_input, mpg)
 p_value = zip(cars_input.columns.values,fp_value[1])
-sorted(p_value,key=lambda x: x[1])
+print sorted(p_value,key=lambda x: x[1])
