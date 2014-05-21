@@ -33,7 +33,7 @@ DATA_DIR = '../../../data/'
 
 # Various variables we'll need to set intially.
 n_neighbors = range(1, 51, 2)
-np.random.seed(32)
+np.random.seed(1234)
 
 # Load in the data and seperate the class labels and input data
 iris = datasets.load_iris()
@@ -59,15 +59,63 @@ y_train, y_test = y[idx], y[idx==False]
 scores = []
 for n in n_neighbors:
     clf = neighbors.KNeighborsClassifier(n)
-    clf.fit(X_train, y_train)    
-    scores.append(clf.score(X_test, y_test))
+    
+    # training data set create model
+    clf.fit(X_train, y_train)
 
-# Loop through each neighbors value from 1 to 51 and append
-# the scores
-scores = []
-for n in n_neighbors:
-    clf = neighbors.KNeighborsClassifier(n)
-    clf.fit(X_train, y_train)    
+    #test the model with the testing data
     scores.append(clf.score(X_test, y_test))
 
 print scores
+
+# we found k = 11 is the best
+
+scores = []
+for k in range(3,13,2):
+    np.random.shuffle(ind)
+    X_train, X_test = X[ind], X[ind == False]
+    y_train, y_test = y[ind], y[ind == False]
+    clf = neighbors.KNeighborsClassifier(11, weights='uniform')
+    clf.fit(X_train, y_train)
+    scores.append(clf.score(X_test, y_test))
+
+print scores
+
+print np.mean(scores)
+
+clf = neighbors.KNeighborsClassifier(21, weights='uniform')
+clf.fit(X[:, 2:4], y)
+
+
+
+df = pd.DataFrame(iris.data, columns=iris.feature_names)
+
+df = df.ix[:,:4]
+df.head()
+print df.describe()
+
+"""
+Normalise a dataframe, centered around 0
+"""
+
+df_norm = (df - df.mean()) / (df.max() - df.min())
+
+print df_norm.describe()
+
+"""
+Normalise a set of columns in a dataframe, between 0 and 1
+"""
+
+df_norm = (df - df.min()) / (df.max() - df.min())
+
+print df_norm.describe()
+
+"""
+Weight a set of columns in a dataframe, by 2 and 1/2
+"""
+
+sepals = ['sepal length (cm)','sepal width (cm)']
+petals = ['petal length (cm)','petal width (cm)']
+df_weighted = pd.DataFrame.join(df[sepals] * 2, df[petals] / 2)
+
+print df_weighted.describe()
