@@ -51,6 +51,11 @@ print score(input, good)
 
 dummies = pd.get_dummies(beer['Brewery'])
 
+
+#need to drop the column that have the least number so that the coef can weight better, 
+#the number of coef should always be n-1
+
+#
 input = beer[select].join(dummies.ix[:, 1:])
 
 print score(input, good)

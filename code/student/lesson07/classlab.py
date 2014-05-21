@@ -23,6 +23,9 @@ DATA_DIR = '../../../data/'
 #url = 'http://www-958.ibm.com/software/analytics/manyeyes/datasets/af-er-beer-dataset/versions/1.txt'
 beer = pd.read_csv(DATA_DIR + 'beer.txt', delimiter="\t")
 
+#print beer.columns
+
+dummies = pd.get_dummies(beer['Brewery'])
 #print beer.head()
 
 #print beer.describe()
@@ -96,6 +99,3 @@ logm2.fit(X, y)
 #print logm2.predict(X)
 
 print logm2.score(X, y)
-
-
-
