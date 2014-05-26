@@ -43,9 +43,9 @@ beer_types = ['Ale', 'Stout', 'IPA', 'Lager']
 for t in beer_types:
 	beer[t] = beer['Type'].str.contains(t) * 1
 
-#select = ['Reviews', 'ABV', 'Ale', 'Stout', 'IPA', 'Lager']
+select = ['Reviews', 'ABV', 'Ale', 'Stout', 'IPA', 'Lager']
 
-select = ['Reviews', 'ABV']
+#select = ['Reviews', 'ABV']
 
 dummies = pd.get_dummies(beer['Brewery'])
 
