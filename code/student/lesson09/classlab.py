@@ -92,6 +92,8 @@ submission = pd.DataFrame({'id' : test.id, 'insult': predictions})
 submission.to_csv(os.getcwd()+'/submission.csv', index=False)
 
 
+###Use Tfid Vectorizer
+
 from sklearn.feature_extraction.text import TfidfVectorizer
 vect = TfidfVectorizer(sublinear_tf=True, max_df=0.7)
 X_train = vect.fit_transform(train.Comment)

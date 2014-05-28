@@ -7,39 +7,31 @@
 # GA DataScience Baseball attemp 1
 # Date: 2014-05-19
 
-
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn import linear_model, feature_selection
+from sklearn import linear_model, metrics
 
-import re
+DATA_DIR = '../../../../data/baseball/'
 
-# Store data in a consistent place
-DATA_DIR = '../../../../data/'
+b2011 = pd.read_csv(DATA_DIR + 'baseball_training_2011.csv')
+b2012 = pd.read_csv(DATA_DIR + 'baseball_test_2012.csv')
 
-baseball = pd.read_csv(DATA_DIR + 'baseball_new.csv')
 
-#baseball = baseball.dropna(axis=1)
-
-baseball = baseball.fillna(0)
-
-#print baseball.columns
-
-#print baseball.columns
-
-X = baseball[ ["HR", "RBI", 'R', "G", "SB", 'height', 'weight', 'yearID'] ].values
-
-y = baseball[ ['salary'] ].values
-
-#print "==="
-
-print y
-
-#print baseball.describe()
-
-bb_logm = linear_model.LogisticRegression()
-
-bb_logm.fit(X, y)
-
-print bb_logm.score(X, y)
+#
+train_X = b2011[['G', 'AB', 'R', 'H', 'X2B', 'X3B', 'HR', 'RBI', 'SB', 'CS', 'BB', 'SO', 'IBB', 'HBP', 'SH', 'SF']].values
+train_y = b2011['salary'].values
+#
+test_X = b2012[['G', 'AB', 'R', 'H', 'X2B', 'X3B', 'HR', 'RBI', 'SB', 'CS', 'BB', 'SO', 'IBB', 'HBP', 'SH', 'SF']].values
+b2012_csv = b2012[['playerID','yearID', 'salary']]
+#
+lm = linear_model.Ridge()
+lm.fit(train_X, train_y)
+#
+# Checking performance, roughly .19
+print 'R-Squared:',lm.score(train_X, train_y)
+# Checking MSE, roughly terrible
+print 'MSE:',metrics.mean_squared_error(lm.predict(train_X), train_y)
+#
+# Outputting to a csv file
+print "Outputting submission file as 'submission.csv'"
+b2012_csv['predicted'] = lm.predict(test_X)
+#b2012_csv.to_csv('submission.csv')
