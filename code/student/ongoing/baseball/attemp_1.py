@@ -15,6 +15,15 @@ DATA_DIR = '../../../../data/baseball/'
 b2011 = pd.read_csv(DATA_DIR + 'baseball_training_2011.csv')
 b2012 = pd.read_csv(DATA_DIR + 'baseball_test_2012.csv')
 
+#print b2011['SF']
+
+birth_con_list = ['D.R.', 'USA', 'Venezuela', 'CAN', 'Germany', 'Australia', 'P.R.']
+
+for t in birth_con_list:
+	b2011[t] = b2011['birthCountry'].str.contains(t) * 1
+	b2012[t] = b2012['birthCountry'].str.contains(t) * 1
+
+#print b2011.columns
 
 #
 train_X = b2011[['G', 'AB', 'R', 'H', 'X2B', 'X3B', 'HR', 'RBI', 'SB', 'CS', 'BB', 'SO', 'IBB', 'HBP', 'SH', 'SF']].values
