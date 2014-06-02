@@ -147,6 +147,11 @@ print 'MSE:',metrics.mean_squared_error(try_model.predict(train_X), train_y)
 #
 print '\n'
 
+# Outputting to a csv file
+print "Outputting submission file as 'submission.csv'"
+b2012_csv['predicted'] = try_model.predict(test_X)
+b2012_csv.to_csv('submission.csv')
+
 b2011_num = b2011._get_numeric_data()
 b2011_num = b2011_num.dropna(axis=1)
 salary = b2011_num['salary']
