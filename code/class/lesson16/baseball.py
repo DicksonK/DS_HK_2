@@ -1,3 +1,6 @@
+#!/usr/env python
+# -*- coding: utf-8 -*-
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -18,7 +21,7 @@ bases a player
 base = pd.read_csv('https://raw.github.com/ga-students/DS_HK_1/gh-pages/data/class/baseballRegressionData/baseball.csv')
 
 # Select numerical feature
-base = pd.DataFrame(base, columns=["HR", "RBI", 'R', "G", "SB", "salary", 'height', 'weight', 'yearID'])
+base = pd.DataFrame(base, columns=["HR", "RBI", 'R', "G", "SB", "salary", 'height', 'weight', 'birthYear'])
 
 '''
 Fill null values with mean of each columns: The reason I chose this
@@ -33,7 +36,7 @@ baseFill = base.fillna(base.mean())
 salary = baseFill['salary'].values
 
 # Input
-baseInput = baseFill[["HR", "RBI", 'R', "G", "SB", 'height', 'weight', 'yearID']].values
+baseInput = baseFill[["HR", "RBI", 'R', "G", "SB", 'height', 'weight']].values
 
 # Run feature analysis
 features = feature_selection.univariate_selection.f_regression(baseInput, salary)
@@ -57,8 +60,8 @@ in American society.
 '''
 
 # Seperate significant features
-sig = [ [a, b, c, d] for a, b, c, d in zip(baseFill['HR'].values, baseFill['RBI'].values, baseFill['R'].values, baseFill['yearID'].values)]
-sig = baseFill[['HR', 'RBI', 'R', 'yearID']].values
+sig = [ [a, b, c, d] for a, b, c, d in zip(baseFill['HR'].values, baseFill['RBI'].values, baseFill['R'].values, baseFill['birthYear'].values)]
+sig = baseFill[['HR', 'RBI', 'R', 'birthYear']].values
 
 # Use ridge regression model
 ridge = linear_model.Ridge()
@@ -70,3 +73,18 @@ salaryPredict = salaryFit.predict(sig)
 # Check score of the regression fit
 salaryFit.score(sig, salary)
 # Result: 0.20799776836490136 This terrible.
+
+
+from sklearn.decomposition import PCA
+n = 7
+
+pca = PCA(n_components=n)
+
+pca.fit(baseInput)
+
+variance = pca.explained_variance_ratio_
+r_variance = variance *(1/variance[0])
+print r_variance
+
+plt.plot(range(n), r_variance)
+plt.show()
