@@ -36,7 +36,7 @@ def fillna_int_w_mode(df, col):
 		#print len(df[col][ df[col].isnull() ]) 
 	return df
 
-def dropna_string(df, col, isDes=False):
+def dropna_string(df, col, isDes = False):
 	if isDes:
 		print "Dropped", len(df[col][ df[col].isnull() ]) , "row(s) for [", col ,"]."
 	df = df[pd.notnull(df[col])]
@@ -95,43 +95,87 @@ def print_section_break(header):
 	return result
 
 
-#=====================================
-# Pre-work
-#=====================================
 
-print print_section_break("Pre-work")
+if False:
 
-t0 = time.clock()
+	export_set = read_a_csv('myfirstforest_predict.csv')
 
-train_set = read_a_csv('train.csv', True)
-test_set = read_a_csv('test_v2.csv', True)
-test_set_result = test_set
+	run_list = ['A','B','C','D','E','F','G']
 
-#Car_age has no null
-train_set = fillna_int_w_mode(train_set, "car_age")
-test_set = fillna_int_w_mode(test_set, "car_age")
+	export_set["predict"] = ""
 
-train_set = dropna_string(train_set, "car_value", True)
-test_set = dropna_string(test_set, "car_value", True)
+	for n in range(len(export_set['A'])):
+		temp = ""
 
-train_set = add_string_dummy(train_set, "car_value", True)
-test_set = add_string_dummy(test_set, "car_value", True)
+		for i in run_list:
+			temp = temp + str(export_set[i][n])
 
-train_set = add_string_dummy(train_set, "state", True)
-test_set = add_string_dummy(test_set, "state", True)
+		export_set["predict"][n] = temp
 
-drop_col_list = ['customer_ID', 'shopping_pt', 'record_type', 'day', 'time', 'car_age', 'age_youngest', 'age_oldest', 'C_previous', 'duration_previous', 'cost',  'state', 'location',  'homeowner', 'car_value', 'risk_factor']
+	#print len(export_set['A'])
 
-train_set = drop_some_col(train_set, drop_col_list, True) 
-test_set = drop_some_col(test_set, drop_col_list, True) 
+#	print export_set['A'][0]
 
-for c in train_set.columns:
-	train_set = fillna_int_w_mode(train_set, c)
-	test_set = fillna_int_w_mode(test_set, c)
+#	for i in run_list:
+
+		#export_set["predict"].concat(export_set["predict"], )
+#		export_set["predict"] = export_set["predict"].map(str) + str(export_set[i])
+
+#	export_set["predict"] = pd.concat(export_set['A'].to_frame(),export_set['B'].to_frame())
+
+	print export_set["predict"]
+
+	exp_cols = [col for col in export_set.columns if col not in [u'customer_ID', u'predict']]
+
+	drop_some_col(export_set, exp_cols).to_csv("myfirstforest_predict_clean.csv", header=True, index=False)
+
+if True:
+
+
+	#=====================================
+	# Pre-work
+	#=====================================
+
+	print print_section_break("Pre-work")
+
+	t0 = time.clock()
+
+	train_set = read_a_csv('train.csv', True)
+	test_set = read_a_csv('test_v2.csv', True)
+	test_set_result = test_set
+
+	#Car_age has no null
+	train_set = fillna_int_w_mode(train_set, "car_age")
+	test_set = fillna_int_w_mode(test_set, "car_age")
+
+	train_set = dropna_string(train_set, "car_value", True)
+	test_set = dropna_string(test_set, "car_value", True)
+
+	train_set = add_string_dummy(train_set, "car_value", True)
+	test_set = add_string_dummy(test_set, "car_value", True)
+
+	train_set = add_string_dummy(train_set, "state", True)
+	test_set = add_string_dummy(test_set, "state", True)
+
+	drop_col_list = ['customer_ID', 'shopping_pt', 'record_type', 'day', 'time', 'car_age', 'age_youngest', 'age_oldest', 'C_previous', 'duration_previous', 'cost',  'state', 'location',  'homeowner', 'car_value', 'risk_factor']
+	drop_col_list_2 = ['shopping_pt', 'record_type', 'day', 'time', 'car_age', 'age_youngest', 'age_oldest', 'C_previous', 'duration_previous', 'cost',  'state', 'location',  'homeowner', 'car_value', 'risk_factor']
+
+	#drop_col_list_3 = ['shopping_pt', 'record_type', 'day', 'time', 'car_age', 'age_youngest', 'age_oldest', 'C_previous', 'duration_previous', 'cost',  'state', 'location',  'homeowner', 'car_value', 'risk_factor']
+
+	train_set = drop_some_col(train_set, drop_col_list_2, True) 
+	test_set_result = drop_some_col(test_set, drop_col_list_2, True) 
+
+	test_set = drop_some_col(test_set, drop_col_list_2, True) 
+
+
+	for c in train_set.columns:
+		train_set = fillna_int_w_mode(train_set, c)
+		test_set = fillna_int_w_mode(test_set, c)
+		test_set_result = fillna_int_w_mode(test_set_result, c)
 
 
 
-print time.clock()
+	print time.clock(), "s"
 
 #=====================================
 # Training Model
@@ -149,28 +193,93 @@ Index([u'group_size', u'married_couple', u'A', u'B', u'C', u'D', u'E', u'F', u'G
 	dtype='object')
 """
 
-print print_section_break("Training Model")
 
-forest = RandomForestClassifier(n_estimators=20)
-
-run_list = ['A','B','C','D','E','F','G']
-
-test_set_result = drop_some_col(test_set_result, run_list)
-
-#test_set.to_csv("checkTest.csv", header=True, index=False)
-
-#predictions_file = open("myfirstforest.csv", "wb")
-#open_file_object = csv.writer(predictions_file)
-
-#print len(train_set)
-#663718
-
-#print len(test_set)
-#198117
-
-#org is 198856
-
+ 
 if True:
+	print print_section_break("Training Model")
+
+	forest = RandomForestClassifier(n_estimators=20)
+
+	run_list = ['A','B','C','D','E','F','G']
+
+	test_set_result = drop_some_col(test_set_result, run_list)
+
+	#test_set.to_csv("checkTest.csv", header=True, index=False)
+
+	#predictions_file = open("myfirstforest.csv", "wb")
+	#open_file_object = csv.writer(predictions_file)
+
+	#print len(train_set)
+	#663718
+
+	#print len(test_set)
+	#198117
+
+	#org is 198856
+
+	import pandas as pd
+	from sklearn import ensemble
+
+
+
+#  loc_train = "kaggle_forest\\train.csv"
+#  loc_test = "kaggle_forest\\test.csv"
+#  loc_submission = "kaggle_forest\\kaggle.forest.submission.csv"
+ 
+	df_train = train_set
+	df_test = test_set
+ 
+	feature_cols = [col for col in df_train.columns if col in [u'group_size', u'married_couple', u'A', u'B', u'C', u'D', u'E', u'F', u'G', u'car_value_g', u'car_value_e', 
+	u'car_value_c', u'car_value_d', u'car_value_f', u'car_value_h', u'car_value_i', u'car_value_b', u'car_value_a', 
+	u'state_IN', u'state_NY', u'state_PA', u'state_WV', u'state_MO', u'state_OH', u'state_OK', u'state_FL', u'state_OR', 
+	u'state_WA', u'state_KS', u'state_NV', u'state_ID', u'state_CO', u'state_CT', u'state_AL', u'state_AR', u'state_NM', 
+	u'state_MS', u'state_MD', u'st sysate_RI', u'state_UT', u'state_ME', u'state_TN', u'state_WI', u'state_MT', u'state_KY', 
+	u'state_WY', u'state_NE', u'state_ND', u'state_DE', u'state_GA', u'state_NH', u'state_IA', u'state_DC', u'state_SD']]
+ 
+	for n in run_list:
+
+		X_train = df_train[feature_cols]
+		X_test = df_test[feature_cols]
+		y_train = df_train[n]
+		y_test = df_test[n]
+
+		test_ids = df_test['customer_ID']
+
+		clf = ensemble.RandomForestClassifier(n_estimators = 200, n_jobs = -1)
+
+		clf.fit(X_train, y_train)
+		test_set_result[n] = clf.predict(X_test)
+		score = cross_val_score(clf, X_test, y_test)
+		print score.mean()
+"""
+	test_set_result.to_csv("myfirstforest_predict2.csv", header=True, index=False)
+
+    #Simple K-Fold cross validation. 5 folds.
+    cv = cross_validation.KFold(len(df_train), k=5, indices=False)
+
+    #iterate through the training and test cross validation segments and
+    #run the classifier on each one, aggregating the results into a list
+    results = []
+    for traincv, testcv in cv:
+        probas = cfr.fit(df_train[traincv], target[traincv]).predict_proba(train[testcv])
+        results.append( logloss.llfun(target[testcv], [x[1] for x in probas]) )
+
+    #print out the mean of the cross-validated results
+    print "Results: " + str( np.array(results).mean() )
+
+"""
+
+		#print clf.predict(X_test)#.to_csv("myfirstforest_predict.csv", header=True, index=False)
+		#print test_set_result["A"]
+"""
+	with open("myfirstforest_other.csv", "wb") as outfile:
+		outfile.write("customer_ID,A\n")
+    	for e, val in enumerate(list()):
+      		outfile.write("%s,%s\n"%(test_ids[e],val))
+"""
+
+
+if False:
 
 	for n in run_list:
 		forest = forest.fit( drop_some_col(train_set, run_list), train_set[n] )
@@ -179,10 +288,10 @@ if True:
 		#print output
 		#open_file_object.writerow(output)
 		scores = cross_val_score(forest, drop_some_col(test_set, run_list), test_set[n])
-		print scores.mean(), "\t\t\t" ,time.clock()
+		print scores.mean(), "\t\t\t" ,time.clock(), "s"
 
 	#predictions_file.close()
 
 
-	test_set_result.to_csv("myfirstforest_fix.csv", header=True, index=False)
+	
 
